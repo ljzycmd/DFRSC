@@ -1,4 +1,4 @@
-## Rolling Shutter Correction with Distortion Flow Estimation
+## Rolling Shutter Correction with Intermediate Distortion Flow Estimation
 
 This repo is under construction.
 
@@ -9,7 +9,7 @@ This repo is under construction.
 
 [Paper]() | [Checkpoints]() | [Visual Results]()
 
-> We propose to correct the rolling shutter distorted images by directly estimating the intermediate **distortion flow** from the underlying global shutter image to the rolling shutter image. Unlike previous methods calculate undistortion flow and apply forward warping to obtain the GS image, the proposed method directly estimates the non-linear distortion flow and utilizes **backward warping** to obtain the corrected image. We propose a global correlation-based attention machnism to obtain the intially distortion flow and GS features jointly. Then, the coarse-to-fine decoder refines and upscales the resolution of the flow and GS features simultaneously. The final GS image is obtained by a multi-flow decoding strategy.
+> We propose to rectify Rolling Shutter (RS) distorted images by directly estimating the intermediate distortion flow from the underlying Global Shutter (GS) image to the RS image. This method differs from previous methods that calculate undistortion flow and apply forward warping to obtain the GS image. Instead, the proposed method directly estimates the non-linear distortion flow and employs backward warping to acquire the corrected image. More specifially, the frame-wise RS features are firstly obtained by a multi-scale encoder. After that, a global correlation-based attention mechanism is proposed to to jointly obtain the initial distortion flow and GS features. Then, the coarse-to-fine decoder refines and upscales the resolu-tion of the flow and GS features simultaneously. The final GS image is obtained by a multi-flow predicting strategy.
 
 ## Quick Start
 
@@ -23,15 +23,15 @@ cd DFRSC
 pip install -r requirements.txt
 ```
 
-### Testing
+### Evaluation
 
 1. Download pretrained checkpoints
 
-    | Model | Dataset | Link |
-    | -------  | --------- | ------ |
-    | DFRSC-3F | BS-RSC  |     |
-    | DFRSC-3F | Fastec-RS |      |
-    | DFRSC-3F | Carla-RS  |      |
+    | Model | Dataset | #Num Frames | Link |
+    | -------  | --------- | ------ | ------ |
+    | DFRSC-3F | BS-RSC  | 3  |  |
+    | DFRSC-3F | Fastec-RS | 3  |   |
+    | DFRSC-3F | Carla-RS  |  3 |    |
 
 2. Prepare data
 
@@ -51,27 +51,31 @@ pip install -r requirements.txt
 
 ### Training
 
+1. Prepare dataset
+
+Download the BS-RSC, Fastec-RS and Carla-RS and specify the dataset root in the training configs (`.yaml` file).
+
 1. Train the model with BS-RSC dataset
 
     ```bash
-    python train.py
+    python train.py -opt path/to/your/config
     ```
 
 2. Train the model with Fastec-RS dataset
 
     ```bash
-    python train.py
+    python train.py -opt path/to/your/config
     ```
 
 3. Train the model with Carla-RS dataset
 
     ```bash
-    python train.py
+    python train.py -opt path/to/your/config
     ```
 
 ### Acknowlements
 
-The code is implemented with the open-soured image restoration framework [BasicSR](https://github.com/XPixelGroup/BasicSR), we thank the developers for relasing such an awesome framework.
+The code is implemented upon the open-soured image restoration framework [BasicSR](https://github.com/XPixelGroup/BasicSR), we thank the authors for relasing such an awesome framework.
 
 ### Citation
 
