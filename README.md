@@ -7,7 +7,7 @@ This repo is under construction.
 [Yujiu Yang](https://scholar.google.com/citations?user=4gH3sxsAAAAJ),
 [Yinqiang Zheng](https://scholar.google.com/citations?user=JD-5DKcAAAAJ) <br>
 
-[Paper]() | [Checkpoints]() | [Visual Results]()
+[Paper]()&ensp;|&ensp;[Checkpoints]()&ensp;|&ensp;[Visual Results]()
 
 > We propose to rectify Rolling Shutter (RS) distorted images by directly estimating the intermediate distortion flow from the underlying Global Shutter (GS) image to the RS image. This method differs from previous methods that calculate undistortion flow and apply forward warping to obtain the GS image. Instead, the proposed method directly estimates the non-linear distortion flow and employs backward warping to acquire the corrected image. More specifially, the frame-wise RS features are firstly obtained by a multi-scale encoder. After that, a global correlation-based attention mechanism is proposed to to jointly obtain the initial distortion flow and GS features. Then, the coarse-to-fine decoder refines and upscales the resolu-tion of the flow and GS features simultaneously. The final GS image is obtained by a multi-flow predicting strategy.
 
@@ -28,7 +28,7 @@ pip install -r requirements.txt
 1. Download pretrained checkpoints
 
     | Model | Dataset | #Num Frames | Link |
-    | -------  | --------- | ------ | ------ |
+    | -------  | --------- |:------:| ------ |
     | DFRSC-3F | BS-RSC  | 3  |  |
     | DFRSC-3F | Fastec-RS | 3  |   |
     | DFRSC-3F | Carla-RS  |  3 |    |
@@ -53,31 +53,21 @@ pip install -r requirements.txt
 
 1. Prepare dataset
 
-Download the BS-RSC, Fastec-RS and Carla-RS and specify the dataset root in the training configs (`.yaml` file).
+    Download the BS-RSC, Fastec-RS and Carla-RS and specify the dataset root in the training configs (`.yaml` file).
 
-1. Train the model with BS-RSC dataset
-
-    ```bash
-    python train.py -opt path/to/your/config
-    ```
-
-2. Train the model with Fastec-RS dataset
+2. Start training
 
     ```bash
-    python train.py -opt path/to/your/config
+    bash train.sh
     ```
 
-3. Train the model with Carla-RS dataset
+    You my modify the config file path in the `train.sh` to train the model with different datasets.
 
-    ```bash
-    python train.py -opt path/to/your/config
-    ```
-
-### Acknowlements
+## Acknowlements
 
 The code is implemented upon the open-soured image restoration framework [BasicSR](https://github.com/XPixelGroup/BasicSR), we thank the authors for relasing such an awesome framework.
 
-### Citation
+## Citation
 
 If the proposed model is useful for your research, please consider citing our paper
 
@@ -90,6 +80,6 @@ If the proposed model is useful for your research, please consider citing our pa
 }
 ```
 
-### Contact
+## Contact
 
 If you have any questions about our project, please feel free to contact me at `mingdengcao [AT] gmail.com`.
