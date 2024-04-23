@@ -7,7 +7,7 @@ This repo is under construction.
 [Yujiu Yang](https://scholar.google.com/citations?user=4gH3sxsAAAAJ),
 [Yinqiang Zheng](https://scholar.google.com/citations?user=JD-5DKcAAAAJ) <br>
 
-[Paper](https://arxiv.org/abs/2404.06350)&ensp;|&ensp;[Checkpoints](https://github.com/ljzycmd/DFRSC/releases/tag/ckpts)&ensp;|&ensp;[Visual Results]()
+[Paper](https://arxiv.org/abs/2404.06350)&ensp;|&ensp;[Checkpoints](https://github.com/ljzycmd/DFRSC/releases/tag/ckpts)&ensp;|&ensp;[Results on BS-RSC](https://github.com/ljzycmd/DFRSC/releases/download/results/DFRSC_3F_BSRSC.zip)&ensp;|&ensp;[Results on Fastec-RS](https://github.com/ljzycmd/DFRSC/releases/download/results/DFRSC_3F_FastecRS.zip)&ensp;|&ensp;[Results on Carla-RS](https://github.com/ljzycmd/DFRSC/releases/download/results/DFRSC_3F_CarlaRS.zip)
 
 > We propose to rectify Rolling Shutter (RS) distorted images by directly estimating the intermediate distortion flow from the underlying Global Shutter (GS) image to the RS image. This method differs from previous methods that calculate undistortion flow and apply forward warping to obtain the GS image. Instead, the proposed method directly estimates the non-linear distortion flow and employs backward warping to acquire the corrected image. More specifially, the frame-wise RS features are firstly obtained by a multi-scale encoder. After that, a global correlation-based attention mechanism is proposed to to jointly obtain the initial distortion flow and GS features. Then, the coarse-to-fine decoder refines and upscales the resolu-tion of the flow and GS features simultaneously. The final GS image is obtained by a multi-flow predicting strategy.
 
