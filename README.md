@@ -7,7 +7,7 @@ This repo is under construction.
 [Yujiu Yang](https://scholar.google.com/citations?user=4gH3sxsAAAAJ),
 [Yinqiang Zheng](https://scholar.google.com/citations?user=JD-5DKcAAAAJ) <br>
 
-[Paper]()&ensp;|&ensp;[Checkpoints]()&ensp;|&ensp;[Visual Results]()
+[Paper](https://arxiv.org/abs/2404.06350)&ensp;|&ensp;[Checkpoints](https://github.com/ljzycmd/DFRSC/releases/tag/ckpts)&ensp;|&ensp;[Visual Results]()
 
 > We propose to rectify Rolling Shutter (RS) distorted images by directly estimating the intermediate distortion flow from the underlying Global Shutter (GS) image to the RS image. This method differs from previous methods that calculate undistortion flow and apply forward warping to obtain the GS image. Instead, the proposed method directly estimates the non-linear distortion flow and employs backward warping to acquire the corrected image. More specifially, the frame-wise RS features are firstly obtained by a multi-scale encoder. After that, a global correlation-based attention mechanism is proposed to to jointly obtain the initial distortion flow and GS features. Then, the coarse-to-fine decoder refines and upscales the resolu-tion of the flow and GS features simultaneously. The final GS image is obtained by a multi-flow predicting strategy.
 
@@ -28,10 +28,10 @@ pip install -r requirements.txt
 1. Download pretrained checkpoints
 
     | Model | Dataset | #Num Frames | Link |
-    | -------  | --------- |:------:| ------ |
-    | DFRSC-3F | BS-RSC  | 3  |  |
-    | DFRSC-3F | Fastec-RS | 3  |   |
-    | DFRSC-3F | Carla-RS  |  3 |    |
+    | -------  | --------- |:------:|:------:|
+    | DFRSC-3F | BS-RSC  | 3  | [Github](https://github.com/ljzycmd/DFRSC/releases/download/ckpts/dfrsc_3f_bsrsc.pth)  |
+    | DFRSC-3F | Fastec-RS | 3  | [Github](https://github.com/ljzycmd/DFRSC/releases/download/ckpts/dfrsc_3f_fastecrs.pth) |
+    | DFRSC-3F | Carla-RS  |  3 | [Github](https://github.com/ljzycmd/DFRSC/releases/download/ckpts/dfrsc_3f_fastecrs.pth) |
 
 2. Prepare data
 
