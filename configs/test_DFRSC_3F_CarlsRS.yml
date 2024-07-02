@@ -1,0 +1,58 @@
+# general settings
+name: CR000_test_DFRSC_CarlaRS_150k_B8G1_3Frames
+model_type: DFRscModel
+num_gpu: auto  # auto: can infer from your visible devices automatically. official: 4 GPUs
+manual_seed: 0
+
+# dataset and data loader settings
+datasets:
+  # Uncomment these for validation
+  test:
+    name: CarlaRS_testing
+    type: CarlaRS
+
+    mode: val
+    time_map: True
+    sampling: n_c  # "n_n" and "n_c" , "n_l", "n_r"
+    overlapping: True
+    interval: 1
+    pos: m  # middle
+    
+    root_gt: ./datasets/CarlaRS/test
+    num_frames: 3
+
+    loader:
+        batch_size: 1
+        num_workers: 1
+
+# network structures
+network_g:
+  type: DFRSC
+  in_channels: 3
+  inner_channels: [16, 28, 40, 64, 96]
+  out_channels: 3
+  num_frames: 3
+  num_flows: 4
+  num_blocks: 3
+
+# path
+path:
+  pretrain_network_g: TODO: Specifiy the pretrained checkpoint path
+  param_key_g: params_ema
+  strict_load_g: true
+  resume_state: ~
+
+# Uncomment these for validation
+# validation settings
+val:
+  save_img: True
+  suffix: ~
+
+  metrics:
+    psnr: # metric name
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 0

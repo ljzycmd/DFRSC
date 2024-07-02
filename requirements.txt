@@ -1,0 +1,7 @@
+torch
+torchvision
+numpy
+meshzoo
+basicsr
+
+# your may adjust the version of the packages according to your hardware and software environment

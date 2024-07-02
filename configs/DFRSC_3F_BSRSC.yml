@@ -1,0 +1,136 @@
+# general settings
+name: BR000_train_DFRSC_150k_B8G1_3Frames
+model_type: DFRscModel
+num_gpu: auto  # auto: can infer from your visible devices automatically. official: 4 GPUs
+manual_seed: 0
+
+# dataset and data loader settings
+datasets:
+  train:
+    name: BSRSC_train
+    type: BSRSC
+
+    mode: train
+    time_map: True
+
+    sampling: n_c  # "n_n" and "n_c" , "n_l", "n_r"
+    overlapping: True
+    interval: 1
+    pos: middle  # first
+
+    root_gt: ./datasets/BS-RSC/train
+    num_frames: 3
+    
+    # augmentations
+    rs_gs_consistency: False
+    augmentation:
+      RandomCrop:
+          size : [768, 256]
+      RandomHorizontalFlip:
+          p: 0.5
+
+    # data loader
+    use_shuffle: true
+    num_worker_per_gpu: 8
+    batch_size_per_gpu: 8
+    dataset_enlarge_ratio: 100
+    prefetch_mode: ~
+
+  # Uncomment these for validation
+  val:
+    name: BSRSC_testing
+    type: BSRSC
+    mode: val
+    time_map: True
+    sampling: n_c  # "n_n" and "n_c" , "n_l", "n_r"
+    overlapping: True
+    interval: 1
+    pos: middle  # first
+
+    root_gt: ./datasets/BS-RSC/test
+    num_frames: 3
+
+    loader:
+        batch_size: 1
+        num_workers: 1
+
+# network structures
+network_g:
+  type: DFRSC
+  in_channels: 3
+  inner_channels: [16, 28, 40, 64, 96]
+  out_channels: 3
+  num_frames: 3
+  num_flows: 4
+  num_blocks: 3
+
+# path
+path:
+  # use the pre-trained Real-ESRNet model
+  pretrain_network_g: Null
+  param_key_g: params_ema
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  ema_decay: 0.999
+  optim_g:
+    type: Adam
+    lr: !!float 4e-4
+    weight_decay: 0
+    betas: [0.9, 0.99]
+
+  scheduler:
+    type: MultiStepLR
+    milestones: [50000, 100000, 120000, 140000]
+    gamma: 0.5
+
+  total_iter: 150000
+  warmup_iter: -1  # no warm up
+
+  # losses
+  pixel_opt:
+    type: CharbonnierLoss
+    loss_weight: 1.0
+    reduction: mean
+
+  perceptual_opt:
+    type: PerceptualLoss
+    layer_weights:
+      'conv5_4': 1  # before relu
+    vgg_type: vgg19
+    use_input_norm: true
+    range_norm: false
+    perceptual_weight: !!float 1e-3
+    style_weight: 0
+    criterion: l1
+
+# Uncomment these for validation
+# validation settings
+val:
+  val_freq: !!float 1e4
+  save_img: True
+
+  metrics:
+    psnr: # metric name
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 1e4
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

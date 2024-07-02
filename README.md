@@ -46,7 +46,7 @@ pip install -r requirements.txt
     You should modify the pretrained path in the corresponding config file.
 
     ```bash
-    python test.py
+    python test.py -opt ./configs/test_DFRSC_3F_BSRSC.yml
     ```
 
 ### Training
@@ -58,10 +58,10 @@ pip install -r requirements.txt
 2. Start training
 
     ```bash
-    bash train.sh
+    bash run_train.sh
     ```
 
-    You my modify the config file path in the `train.sh` to train the model with different datasets.
+    You my modify the config file path in the `run_train.sh` to train the model with different datasets.
 
 ## Acknowlements
 
