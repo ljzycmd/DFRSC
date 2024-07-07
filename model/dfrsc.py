@@ -2,8 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-# from .utils import FlowAttention, FlowAttentionV2, FlowAttentionV3, FlowAttentionV4
-
 from basicsr.utils.registry import ARCH_REGISTRY
 
 
